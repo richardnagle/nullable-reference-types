@@ -16,6 +16,12 @@ isDotNetCore = true;
 // Add tasks as required, optional
 //////////////////////////////////////////////////////////////////////
 
+Task("Install-DotNetCoreSdk-3.0")
+    .WithCriteria(() => isDotNetCore)
+    .Does(() =>
+{
+    InstallDotnetSdk("3.0.100");
+});
 
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
@@ -25,6 +31,7 @@ isDotNetCore = true;
 
 Task("Default")
     .IsDependentOn("Info")
+    .IsDependentOn("Install-DotNetCoreSdk-3.0")
     .IsDependentOn("Build");
 
 //////////////////////////////////////////////////////////////////////
